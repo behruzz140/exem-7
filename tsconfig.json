@@ -1,0 +1,69 @@
+{
+    "compilerOptions": {
+        "target": "ES2020",
+        "useDefineForClassFields": true,
+        "lib": ["ES2020", "DOM", "DOM.Iterable"],
+        "module": "ESNext",
+        "skipLibCheck": true,
+        "paths": {
+            "@/*": ["./*"],
+
+            "@types": ["./src/types"],
+            "@interface": ["./src/types/interface"],
+            "@globol-interface": ["./src/types/globol-interface"],
+            "@enums": ["./src/types/enums"],
+
+            "@utils": ["./src/utils"],
+            "@coocse": ["./src/utils/cocies.ts"],
+            "@hooks": ["./src/hooks"],
+
+            "@components": ["./src/components"],
+            "@containers": ["./src/components/containers"],
+            "@modals": ["./src/components/modals"],
+            "@ui": ["./src/components/ui"],
+            "@sections": ["./src/components/sections"],
+
+            "@layut": ["./src/layout"],
+            "@pages": ["./src/pages"],
+            "@router": ["./src/router"],
+            "@validations": ["./src/validations"],
+
+
+            "@services": ["./src/services"],
+            "@service-auth": ["./src/service/auth"],
+            "@category": ["./src/service/category"],
+            "@brand": ["./src/service/brand"],
+            "@brand-category": ["./src/service/brand-category"],
+            "@sub-category": ["./src/service/sub-category"],
+            "@product": ["./src/service/product"],
+
+            // "@product": ["./src/service/product"],
+
+
+
+
+            "@stor-category": ["./src/stor/stor-category"],
+            "@store-sub-category": ["./src/stor/stor-sub-category"],
+            "@store-brand": ["./src/stor/stor-brand"],
+            "@store-brand-category": ["./src/stor/stor-brand-category"],
+            "@store-product": ["./src/stor/stor-product"],
+
+            
+        },
+        /* Bundler mode */
+        "moduleResolution": "bundler",
+        "allowImportingTsExtensions": true,
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "noEmit": true,
+        "jsx": "react-jsx",
+
+        /* Linting */
+        "strict": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "noFallthroughCasesInSwitch": true
+    },
+    "include": ["src"],
+    "references": [{"path": "./tsconfig.node.json"}]
+}

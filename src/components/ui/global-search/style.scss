@@ -1,0 +1,29 @@
+.search-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px; /* Adjust as needed */
+  }
+  
+  .search-paper {
+    display: flex;
+    align-items: center;
+    border-radius: 50px; /* Make it more round */
+    background-color: white; /* White background */
+    box-shadow: 0 4px 6px rgba(0, 0, 255, 0.1); /* Blue shadow effect */
+  }
+  
+  .search-input {
+    flex: 1;
+    padding: 10px;
+    font-size: 16px;
+  }
+  
+  .search-button {
+    padding: 8px;
+    color: #666; /* Dark gray icon color */
+  }
+  
+  .search-button:hover {
+    background-color: #ddd; /* Light gray background on hover */
+  }
+  
