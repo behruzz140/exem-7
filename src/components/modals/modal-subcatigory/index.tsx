@@ -42,7 +42,7 @@ export default function BasicModal({ title, id, data }: propsData) {
   const validationSchema = Yup.object().shape({
     name: Yup.string().required("Name is required"),
   });
-
+ 
   const initialValues: postCategory = {
     name: data?.name || "",
   };
@@ -79,7 +79,7 @@ export default function BasicModal({ title, id, data }: propsData) {
           onClick={handleOpen}
           className="py-2 px-6 text-white font-semibold bg-blue-500 hover:bg-blue-700 active:bg-blue-600 duration-200 rounded-lg"
         >
-          To add
+          ADD SUBCATEGORY
         </button>
       ) : (
         <Button
@@ -145,7 +145,7 @@ export default function BasicModal({ title, id, data }: propsData) {
                 type="submit"
                 className="w-[100%] py-3"
               >
-                To add
+               ADD SUBCATEGORY
               </Button>
             </Form>
           </Formik>

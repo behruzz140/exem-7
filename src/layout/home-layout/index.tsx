@@ -74,7 +74,7 @@ export default function ResponsiveDrawer(props: Props) {
     if (pathname === "/home/products") return "Products";
     if (pathname === "/home") return "Category";
     if (/^\/home\/category\/\d+$/.test(pathname)) return "Subcategory"; 
-    if (/^\/home\/brands\/\d+$/.test(pathname)) return "Brand Catigory"; 
+    if (/^\/home\/brands\/\d+$/.test(pathname)) return "Brand Category"; 
     if (/^\/home\/products\/\d+$/.test(pathname)) return "Product"; // Regex for dynamic path
 
     return "Error";
