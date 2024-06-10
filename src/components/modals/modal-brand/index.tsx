@@ -88,7 +88,7 @@ export default function BasicModal({ title, id, data }: PropsData) {
           onClick={handleOpen}
           className="py-2 px-6 text-white font-semibold bg-[#007BFF] hover:bg-[#0056b3] active:bg-[#007BFF] duration-200 rounded-lg"
         >
-          Add
+          ADD BRAND
         </button> 
       : 
         <Button

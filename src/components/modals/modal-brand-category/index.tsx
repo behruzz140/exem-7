@@ -83,7 +83,7 @@ export default function BasicModal({ title, id, data }: propsData) {
           onClick={handleOpen}
           className="py-2 px-6 text-white font-semibold bg-[#0074cc] hover:bg-[#005c99] active:bg-[#004080] duration-200 rounded-lg"
         >
-          To add
+          ADD BRAND CATEGORY
         </button>
       ) : (
         <Button

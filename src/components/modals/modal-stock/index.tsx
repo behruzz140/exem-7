@@ -10,11 +10,9 @@ import { useEffect } from "react";
 
 import useBrandStore from "@store-brand";
 import useCategoryStore from "@stor-category";
-import useProductStore from "@store-product";
-import useBrandCategoryStore from "@store-brand-category";
-import { postData } from "@product"
+import useStockStore from "../../../stor/stor-stock";
+import { postData } from "../../../service/stock";
 
-// Updated modal styles for a blue theme
 const style = {
   position: "absolute" as "absolute",
   top: "50%",
@@ -22,22 +20,21 @@ const style = {
   transform: "translate(-50%, -50%)",
   width: 400,
   bgcolor: "background.paper",
-  border: "2px solid #004f97", // Blue border
+  border: "2px solid #1E90FF", // Changed to blue
   boxShadow: 24,
   p: 4,
 };
 
-interface propsData {
+interface PropsData {
   title: string;
   id?: number;
   data?: any;
 }
 
-export default function BasicModal({ title, id, data }: propsData) {
-  const { postProduct, updateProduct } = useProductStore();
+export default function BasicModal({ title, id, data }: PropsData) {
+  const { postStock, updateStock, grtBrandIdStock, dataBrandIdStock } = useStockStore();
   const { getDataCategory, dataCategory } = useCategoryStore();
   const { getCategoryId, dataBrandsId } = useBrandStore();
-  const { getCategoryBrandId, dataBrandCategoryId } = useBrandCategoryStore();
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -48,24 +45,22 @@ export default function BasicModal({ title, id, data }: propsData) {
   }, []);
 
   const validationSchema = Yup.object().shape({
-    name: Yup.string().required("Name is required"),
-    price: Yup.number().min(0, "Must be at least greater than 0"),
+    quantity: Yup.number().min(0, "Must be at least greater than 0"),
     category_id: Yup.number().min(0, "Must be at least greater than 0"),
-    brand_category_id: Yup.number().min(0, "Must be at least greater than 0"),
+    product_id: Yup.number().min(0, "Must be at least greater than 0"),
     brand_id: Yup.number().min(0, "Must be at least greater than 0"),
   });
 
   const initialValues: postData = {
-    name: data?.name || "",
-    price: data?.price || "",
+    quantity: data?.quantity || "",
     brand_id: data?.brand_id || "",
-    brand_category_id: data?.brand_category_id || "",
+    product_id: data?.brand_category_id || "",
     category_id: data?.category_id || "",
   };
 
   const handelSubmit = async (value: postData) => {
     if (!id) {
-      const status = await postProduct(value);
+      const status = await postStock(value);
       if (status === 201) {
         toast.success("Successfully added");
         handleClose();
@@ -75,9 +70,9 @@ export default function BasicModal({ title, id, data }: propsData) {
       }
     } else {
       const updateData = { id: id, putData: value };
-      const status = await updateProduct(updateData);
+      const status = await updateStock(updateData);
       if (status === 200) {
-        toast.success("Successfully updated");
+        toast.success("Update successful");
         handleClose();
       } else {
         toast.error("Error: " + status);
@@ -90,8 +85,8 @@ export default function BasicModal({ title, id, data }: propsData) {
     getCategoryId({ id: id });
   };
 
-  const handleChange = (id: number) => {
-    getCategoryBrandId({ id: id });
+  const handleChange2 = (id: number) => {
+    grtBrandIdStock(id);
   };
 
   return (
@@ -99,15 +94,15 @@ export default function BasicModal({ title, id, data }: propsData) {
       {title === "post" ? (
         <button
           onClick={handleOpen}
-          className="py-2 px-6 text-white font-semibold bg-[#0074cc] hover:bg-[#005c99] active:bg-[#004080] duration-200 rounded-lg"
+          className="py-2 px-6 text-white font-semibold bg-[#1E90FF] hover:bg-[#1C86EE] active:bg-[#1E90FF] duration-200 rounded-lg"
         >
-         ADD PRODUCT
+        ADD SALES
         </button>
       ) : (
         <Button
           color="inherit"
           onClick={handleOpen}
-          sx={{ color: '#0074cc' }}
+          sx={{ color: '#1E90FF' }} // Changed to blue
         >
           <EditIcon />
         </Button>
@@ -126,7 +121,7 @@ export default function BasicModal({ title, id, data }: propsData) {
           >
             <Form className="max-w-[600px] w-full flex flex-col gap-[12px]">
               <h1 className="text-center mb-2 text-[26px] font-bold">
-                {title === "post" ? "Add a product" : "Edit a product"}
+                {title === "post" ? "Add a stock" : "Edit a stock"}
               </h1>
 
               <Field
@@ -143,7 +138,7 @@ export default function BasicModal({ title, id, data }: propsData) {
                   <ErrorMessage
                     name="category_id"
                     component="p"
-                    className="text-[blue] text-[15px]"
+                    className="text-[red] text-[15px]"
                   />
                 }
               >
@@ -168,22 +163,22 @@ export default function BasicModal({ title, id, data }: propsData) {
                   <ErrorMessage
                     name="brand_id"
                     component="div"
-                    className="text-[blue] text-[15px]"
+                    className="text-[red] text-[15px]"
                   />
                 }
               >
                 {dataBrandsId?.map((item: any, index: number) => (
-                  <MenuItem key={index} value={item.id} onClick={() => handleChange(item.id)}>
+                  <MenuItem key={index} value={item.id} onClick={() => handleChange2(item.id)}>
                     {item.name}
                   </MenuItem>
                 ))}
               </Field>
 
               <Field
-                name="brand_category_id"
+                name="product_id"
                 type="text"
                 as={TextField}
-                label="Brand Category ID"
+                label="Product ID"
                 select
                 className="relative"
                 margin="none"
@@ -191,62 +186,42 @@ export default function BasicModal({ title, id, data }: propsData) {
                 fullWidth
                 helperText={
                   <ErrorMessage
-                    name="brand_category_id"
+                    name="product_id"
                     component="p"
-                    className="text-[blue] text-[15px]"
+                    className="text-[red] text-[15px]"
                   />
                 }
               >
-                {dataBrandCategoryId?.map((item: any, index: number) => (
-                  <MenuItem key={index} value={item.id}>
-                    {item.name}
+                {dataBrandIdStock?.map((item: any, index: number) => (
+                  <MenuItem key={index} value={item?.product_id?.id}>
+                    {item?.product_id?.name}
                   </MenuItem>
                 ))}
               </Field>
 
               <Field
                 as={TextField}
-                label="Product name"
-                sx={{ "& input": { color: "#00000", fontSize: "20px" } }}
-                type="text"
-                name="name"
-                className="w-[100%] mb-3 outline-none py-0"
-                helperText={
-                  <ErrorMessage
-                    name="name"
-                    component="p"
-                    className="mb-3 text-blue-500 text-center"
-                  />
-                }
-              />
-              <Field
-                as={TextField}
-                label="Price"
+                label="Quantity"
                 sx={{ "& input": { color: "#00000", fontSize: "20px" } }}
                 type="number"
-                name="price"
+                name="quantity"
                 className="w-[100%] mb-3 outline-none py-0"
                 helperText={
                   <ErrorMessage
-                    name="price"
+                    name="quantity"
                     component="p"
-                    className="mb-3 text-blue-500 text-center"
+                    className="mb-3 text-red-500 text-center"
                   />
                 }
               />
 
               <Button
-                sx={{
-                  fontSize: "16px",
-                  fontWeight: "600",
-                  backgroundColor: "#0074cc",
-                  "&:hover": { background: "#005c99" },
-                }}
+                sx={{ fontSize: "16px", fontWeight: "600", backgroundColor: "#1E90FF", "&:hover": { background: "#1C86EE" } }}
                 variant="contained"
                 type="submit"
                 className="w-[100%] py-3"
               >
-                {title === "post" ? "Add" : "Update"}
+                ADD SALES
               </Button>
             </Form>
           </Formik>

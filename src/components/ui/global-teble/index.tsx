@@ -13,13 +13,13 @@ import {
   Button,
 } from "@mui/material";
 import VisibilityIcon from '@mui/icons-material/Visibility';
-import ShortcutIcon from '@mui/icons-material/ExitToApp';
+import ShortcutIcon from '@mui/icons-material/Shortcut';
 import { useNavigate } from "react-router-dom";
 // import { ToastContainer } from "react-toastify";
 import {  useSearchParams } from "react-router-dom";
 
 import { Props } from "@globol-interface";
-import { ModalDelete , ModalBrand , ModalBrandSingle , ModalCategory , ModalSubCategory , ModalBrandCategory , ModalProduct} from "@modals"
+import { ModalDelete , ModalBrand , ModalBrandSingle , ModalCategory , ModalSubCategory , ModalBrandCategory , ModalProduct , ModalStock} from "@modals"
 
 
 function indec({ heders, body, skelatonLoader }: Props) {
@@ -97,9 +97,15 @@ function indec({ heders, body, skelatonLoader }: Props) {
                               <div className=' text-gray-500'><ModalDelete id={body?.id} title="brand-category"/></div>
                               <ModalBrandSingle title="put" id={body?.id} data={body}/>
                               </div>
+                              :heder.value == "action7" ? <div className="flex items-center gap-2">
+                              <div className=' text-gray-500'><ModalDelete id={body?.id} title="stock"/></div>
+                              <ModalStock title="put" id={body?.id} data={body}/>
+                             {/* <Button sx={{color: '#767676' }} onClick={()=>{navigate(`/home/products/${body?.id}`)}}  className=' text-gray-500'><VisibilityIcon/></Button> */}
+                              </div>
                               : heder.value == "t/r" ? <>{page * limit -(limit - 1) +index }</> 
                               : heder.value == "image" ? <><img className="w-[120px] h-[40px] object-contain" src={body?.image} alt="brand logo" /></> 
                               : heder.value == "price" ? <>{body?.price} $</> 
+                              : heder.value == "product_id?.name" ? <>{body?.product_id?.name}</> 
                               : (body[heder.value])
                             }</TableCell>
                           })

@@ -6,7 +6,7 @@ import { auth } from "@service-auth";
 import { getCookies , removeCookiesAll } from "@coocse";
 import { ModalDeleteAcount } from "@modals";
 import { Draever } from "@ui";
-
+import Admin from '../../assets/admin.jpg'
 function Index() {
   const navigate = useNavigate();
   const [adminData, setAdminData] = useState<any>({});
@@ -40,9 +40,9 @@ function Index() {
         <div className="flex flex-col md:flex-row items-center justify-around bg-white p-6 rounded-lg shadow-md">
           <div className="w-full md:w-1/3 mb-6 md:mb-0">
             <img
-              src="https://t4.ftcdn.net/jpg/03/59/09/01/360_F_359090172_vsL1da5fNVENKKMoQTq7NSwPPrllQcRB.jpg"
+              src={Admin}
               alt="Admin img"
-              className="w-full h-auto rounded-lg shadow-lg"
+              className="w-[90%] h-auto rounded-lg shadow-lg"
             />
           </div>
           <div className="w-full md:w-2/3 flex flex-col sm:flex-row items-start gap-[60px] p-4">

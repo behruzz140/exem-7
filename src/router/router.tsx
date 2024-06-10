@@ -7,6 +7,7 @@ import {
 
 import App from "../App";
 import { Arror, Category,SubCategory , Brand , Settings , BrandCategory, SingleBrandCategory , Product , ProductDetalis} from "@pages"
+import Stock from "../pages/stock"
 import Signin from "../pages/signin"
 import Signup from "../pages/signup"
 import {HomeLayout} from "@layut"
@@ -27,6 +28,7 @@ const index = ()=>{
                 <Route path="settings" element={<Settings />} />
                 <Route path="products" element={<Product />} />
                 <Route path="products/:id" element={<ProductDetalis/>} />
+                <Route path="sales" element={<Stock />} />
             </Route>  
             <Route path="*" element={<Arror />} />
             
