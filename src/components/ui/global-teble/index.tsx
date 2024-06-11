@@ -13,7 +13,8 @@ import {
   Button,
 } from "@mui/material";
 import VisibilityIcon from '@mui/icons-material/Visibility';
-import ShortcutIcon from '@mui/icons-material/Login';
+import LoginIcon from '@mui/icons-material/Login';
+
 import { useNavigate } from "react-router-dom";
 import {  useSearchParams } from "react-router-dom";
 
@@ -72,12 +73,12 @@ function indec({ heders, body, skelatonLoader }: Props) {
                               heder.value == "action" ? <div className="flex items-center gap-2">
                                   <div className=' text-gray-500'><ModalDelete id={body?.id} title="brand"/></div>
                                    <ModalBrand title="put" id={body?.id} data={body}/>
-                                   <Button sx={{color: '#767676' }} onClick={()=>{navigate(`/home/brands/${body?.id}`)}}  className=' text-gray-500'><ShortcutIcon/></Button>
+                                   <Button sx={{color: '#767676' }} onClick={()=>{navigate(`/home/brands/${body?.id}`)}}  className=' text-gray-500'><LoginIcon/></Button>
                               </div>
                               :heder.value == "action2" ? <div className="flex items-center gap-2">
                                  <div className=' text-gray-500'><ModalDelete id={body?.id} title="category"/></div>
                                  <ModalCategory title="put" id={body?.id} data={body}/>
-                                 <Button sx={{color: '#767676' }} onClick={()=>{navigate(`/home/category/${body?.id}`)}}  className=' text-gray-500'><ShortcutIcon/></Button>
+                                 <Button sx={{color: '#767676' }} onClick={()=>{navigate(`/home/category/${body?.id}`)}}  className=' text-gray-500'><LoginIcon/></Button>
                               </div>
                               :heder.value == "action3" ? <div className="flex items-center gap-2">
                               <div className=' text-gray-500'><ModalDelete id={body?.id} title="sub-category"/></div>
